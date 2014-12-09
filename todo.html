@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <style>
+            body{font-family:tahoma; background:#EAEAEA;}
+        </style>
+        <title>To Do List</title>
+    </head>
+
+    <body>
+        <h2>My To Do List</h2>
+        <p style="color:#606060">Use this form to add items to your to do list. When complete, click on the item to remove it from the list.</p>
+        
+        <form name="myform">
+            To Do:
+            <input type="text" name="todo" id="todo" autofocus>
+            <input type="button" value="Add" onClick="addToDo()">
+        </form>
+
+        <br /><hr>
+        <ul id="list" style="font-size:130%"></ul>
+
+        <script>
+            document.getElementById("todo").addEventListener("keypress", function(event) {
+                if (event.keyCode == 13) { addToDo(); }});
+            function addToDo() {
+                var newEl = document.createElement("li");
+                var parentEl = document.getElementById("list");
+                var firstEl = parentEl.firstChild;
+                newEl.innerHTML = document.myform.todo.value;
+                newEl.addEventListener("click", function() {removeToDo(parentEl, newEl); });
+                parentEl.insertBefore(newEl, firstEl);};
+            function removeToDo(parentEl, newEl) {
+                parentEl.removeChild(newEl);};
+        </script>
+    </body>
+</html>
