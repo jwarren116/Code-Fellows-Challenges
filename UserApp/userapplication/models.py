@@ -1,6 +1,13 @@
 from django.db import models
 
-class UserInfo(models.Model):
-    fname = models.CharField(max_length=30)
-    lname = models.CharField(max_length=30)
-    email = models.CharField(max_length=90)
+class UserDetail(models.Model):
+
+    class Meta:
+        verbose_name_plural = "User Details"
+
+    fname = models.CharField('First Name', max_length=100)
+    lname = models.CharField('Last Name', max_length=100, blank=True)
+    email = models.EmailField('Email')
+
+    def __unicode__(self):
+        return "%s %s" % (self.fname, self.lname)

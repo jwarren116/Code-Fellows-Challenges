@@ -3,8 +3,37 @@
 <head>
     <meta charset="utf-8">
     <title>My User Manager</title>
+    <style type="text/css">
+    .container {
+        width: 300px;
+        clear: both;}
+    .container input {
+        width: 100%;
+        clear: both;}
+    </style>
 </head>
 <body>
-    <h1>User Management</h1>
+    <h1>Welcome to the User Management App!</h1>
+    <div class="container">
+        <form action="index" method="POST">{% csrf_token %}
+            <p><label for="fname">First Name:</label></t>
+                <input id="fname" type="text" name="fname" required="True" maxlength="100" /></p>
+            <p><label for="lname">Last Name:</label></t>
+                <input id="lname" type="text" name="lname" maxlength="100" /></p>
+            <p><label for="email">Email:</label></t>
+                <input id="email" type="email" name="email" required="True" maxlength="100" /></p>
+            <input type="submit" value="Submit" />
+        </form>
+    </div>
+    </br><hr></br>
+
+    {% if UserDetail %}
+        {% for user in UserDetail %}
+            <b>First Name</b>: {{ user.fname }} <b>Last Name</b>: {{ user.lname }} <b>Email</b>: {{ user.email }}</br></br>
+        {% endfor %}
+    {% else %}
+            <strong>No users listed.</strong>
+    {% endif %}
+
 </body>
 </html>
