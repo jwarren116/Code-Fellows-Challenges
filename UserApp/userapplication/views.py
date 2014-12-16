@@ -4,7 +4,6 @@ from django.http import HttpResponse, HttpResponseRedirect
 from userapplication.models import UserDetail
 
 class UserForm(ModelForm):
-    
     class Meta:
         model = UserDetail
         fields = ['fname', 'lname', 'email']
@@ -15,9 +14,7 @@ def index(request):
         if userinfo.is_valid():
             userinfo.save()
             return HttpResponseRedirect('index')
-    else:
-        userinfo = UserForm()
     
     return render(request, 'base.html', {
-        'userinfo': userinfo,
-        })
+        'users': UserDetail.objects.order_by('lname'),
+    })
