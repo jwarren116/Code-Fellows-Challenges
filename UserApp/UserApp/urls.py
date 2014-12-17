@@ -11,5 +11,4 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^userapplication/', include('userapplication.urls')),
-    #url(r'^', TemplateView.as_view(template_name='base.html')),
 )

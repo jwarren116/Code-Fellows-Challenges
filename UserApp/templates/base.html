@@ -4,35 +4,38 @@
     <meta charset="utf-8">
     <title>My User Manager</title>
     <style type="text/css">
-    .container {
-        width: 300px;
-        clear: both;}
-    .container input {
-        width: 100%;
-        clear: both;}
+        .container {
+            width: 300px;
+            clear: both;}
+        .container input {
+            width: 100%;
+            clear: both;}
+        body{font-family:tahoma; background:#EAEAEA;}
     </style>
 </head>
 <body>
     <h1>Welcome to the User Management App!</h1>
     <div class="container">
-        <form action="index" method="POST">{% csrf_token %}
+        <form action="" method="POST">{% csrf_token %}
             <p><label for="fname">First Name:</label></t>
                 <input id="fname" type="text" name="fname" required="True" maxlength="100" /></p>
             <p><label for="lname">Last Name:</label></t>
                 <input id="lname" type="text" name="lname" maxlength="100" /></p>
             <p><label for="email">Email:</label></t>
-                <input id="email" type="email" name="email" required="True" maxlength="100" /></p>
+                <input id="email" type="email" name="email" required="True" maxlength="75" /></p>
             <input type="submit" value="Submit" />
         </form>
     </div>
     </br><hr></br>
     {% if users %}
-    <table>
+    <table border="1">
+        <col width="120"><col width="120"><col width="200"><col width="10"><col width="10">
         <thead>
             <tr>
                 <th>First</th>
                 <th>Last</th>
                 <th>Email</th>
+                <th>Edit</th>
                 <th>Delete</th>
             </tr>
         </thead>
@@ -42,7 +45,8 @@
                     <td>{{ user.fname }}</td>
                     <td>{{ user.lname }}</td>
                     <td>{{ user.email }}</td>
-                    <td></td>
+                    <td><a href="{% url 'detail' user.id %}">Edit</a></td>
+                    <td><a href="{{ user.delete }}">X</a></td>
                 </tr>
             {% endfor %}
         </tbody>
