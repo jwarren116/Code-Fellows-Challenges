@@ -1,40 +1,29 @@
 <!DOCTYPE HTML>
 <html>
-<head>
-    <meta charset="utf-8">
-    <title>My User Manager</title>
-    <style type="text/css">
-        .container {
-            width: 300px;
-            clear: both;}
-        .container input {
-            width: 100%;
-            clear: both;}
-        body{font-family:tahoma; background:#EAEAEA;}
-    </style>
-</head>
-<body>
-    <h1>Welcome to the User Management App! This is the DETAIL page!!</h1>
-        </br></br>
-        <h3>{{ user }}</h3>
-            <ul>
-                <li>DB ID: {{ user.id }}
-                <li>Name: {{ user.fname }} {{ user.lname }}
-                <li>Email: {{ user.email }}
-            </ul>
-
-        <hr>
-        <div class="container">
-            <form action="{% url 'update' user.id %}" method="POST">{% csrf_token %}
-                <p><label for="fname">First Name:</label><br />
-                        <input id="fname" type="text" name="fname" required="True" maxlength="100" value="{{ user.fname }}" />
-                <p><label for="lname">Last Name:</label><br />
-                        <input id="lname" type="text" name="lname" maxlength="100" value="{{ user.lname }}" />
-                <p><label for="email">Email:</label><br />
-                        <input id="email" type="email" name="email" maxlength="75" value="{{ user.email }}" />
-                <p><input type="submit" value="Update" />
-            </form>
-        </div>
-    <a href="/userapplication/">Return Home</a>
-</body>
+    <head>
+        <meta charset="utf-8">
+        <title>My User Manager</title>
+        <style type="text/css">
+            .container {
+                width: 300px;
+                clear: both;}
+            .container input {
+                width: 100%;
+                clear: both;}
+            body{font-family:tahoma; background:#EAEAEA;}
+        </style>
+    </head>
+    <body>
+        <h1>Welcome to the User Management App!</h1>
+            </br></br>
+            <h3>{{ user }}</h3>
+                <hr>
+            <div class="container">
+                <form action="{% url 'update' user.id %}" method="POST">{% csrf_token %}
+                    {{ form.as_p }}
+                    <p><input type="submit" value="Update" />
+                </form>
+            </div>
+        <a href="/userapplication/">Return Home</a>
+    </body>
 </html>

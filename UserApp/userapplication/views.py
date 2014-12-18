@@ -7,7 +7,7 @@ from userapplication.models import UserDetail
 class UserForm(ModelForm):
     class Meta:
         model = UserDetail
-        fields = ['fname', 'lname', 'email']
+        fields = ['id', 'fname', 'lname', 'email']
 
 
 def index(request):
@@ -15,31 +15,36 @@ def index(request):
         userinfo = UserForm(request.POST)
         if userinfo.is_valid():
             userinfo.save()
-            return HttpResponseRedirect('')
-    
     return render(request, 'base.html', {
-        'users': UserDetail.objects.order_by('lname'),
+        'users': UserDetail.objects.order_by('id'),
     })
+
 
 def detail(request, id):
     try:
         user = UserDetail.objects.get(pk=id)
+        form = UserForm(instance=user)
     except UserDetail.DoesNotExist:
         raise Http404
     return render(request, 'detail.html', {
-        'user': user
+        'user': user,
+        'form': form,
     })
 
+
 def update(request, id):
-    # try:
-    #     user = UserDetail.objects.get(pk=id)
-    # except UserDetail.DoesNotExist:
-    #     raise Http404
     if request.method == 'POST':
+        user = UserDetail.objects.get(pk=id)
         userinfo = UserForm(request.POST)
         if userinfo.is_valid():
-            userinfo.save()
-            return render(request, 'detail.html', {
-                'user': user,
-                'userinfo': userinfo,
-            })
+            user.fname = request.POST['fname']
+            user.lname = request.POST['lname']
+            user.email = request.POST['email']
+            user.save()
+        return HttpResponseRedirect('/userapplication/')
+
+
+def delete(request, id):
+    user = UserDetail.objects.get(pk=id)
+    user.delete()
+    return HttpResponseRedirect('/userapplication/')    
