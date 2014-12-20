@@ -15,7 +15,7 @@ def index(request):
         userinfo = UserForm(request.POST)
         if userinfo.is_valid():
             userinfo.save()
-    return render(request, 'base.html', {
+    return render(request, 'base_site.html', {
         'users': UserDetail.objects.order_by('id'),
     })
 

@@ -6,53 +6,59 @@
         <style type="text/css">
             .container {
                 width: 300px;
-                clear: both;}
+                clear: both;
+            }
             .container input {
                 width: 100%;
-                clear: both;}
-            body{font-family:tahoma; background:#EAEAEA;}
+                clear: both;
+            }
+            #columns {
+                min-width: 900px;
+            }
+            #columns .column {
+                position: relative;
+                padding: 1%;
+            }
+            #columns .left {
+                float: left;
+            }
+            #columns .right {
+                float: right;
+                width: 300px;
+                background: #F8F8FF;
+            }
+            body {
+                font-family: Lucida Grande, DejaVu Sans, Bitstream Vera Sans, Verdana,Arial,sans-serif;; 
+                background:#FFF;
+                margin: 10px 20px;
+            }
+            h1 {
+                font-family: Lucida Grande, DejaVu Sans, Bitstream Vera Sans, Verdana,Arial,sans-serif;
+                color:#333333; background:#F8F8FF; 
+                margin:8px; 
+                padding:16px;
+            }
+            table {
+                margin-bottom: 20px;
+                border-collapse: collapse;
+                font-family: Verdana, Geneva, sans-serif;
+            }
+            table tr:nth-child(odd) td {
+                background: #E8E8FF;
+            }
+            td {
+                border-top: 1px solid #DDD;
+                padding-top: 8px;
+                padding-bottom: 8px;
+                padding-right: 10px;
+                padding-left: 10px;
+            }
         </style>
     </head>
     <body>
         <h1>Welcome to the User Management App!</h1>
-        <div class="container">
-            <form action="" method="POST">{% csrf_token %}
-                <p><label for="fname">First Name:</label></t>
-                    <input id="fname" type="text" name="fname" required="True" maxlength="100" /></p>
-                <p><label for="lname">Last Name:</label></t>
-                    <input id="lname" type="text" name="lname" maxlength="100" /></p>
-                <p><label for="email">Email:</label></t>
-                    <input id="email" type="email" name="email" required="True" maxlength="75" /></p>
-                <input type="submit" value="Submit" />
-            </form>
-        </div>
-        </br><hr></br>
-        {% if users %}
-            <table border="1">
-                <col width="120"><col width="120"><col width="200"><col width="10"><col width="10">
-                <thead>
-                    <tr>
-                        <th>First</th>
-                        <th>Last</th>
-                        <th>Email</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for user in users %}
-                        <tr>
-                            <td>{{ user.fname }}</td>
-                            <td>{{ user.lname }}</td>
-                            <td>{{ user.email }}</td>
-                            <td align=center><a href="{% url 'detail' user.id %}">Edit</a></td>
-                            <td align=center><a href="{% url 'delete' user.id %}">Delete</a></td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        {% else %}
-            <strong>No users to display!</strong>
-        {% endif %}
+
+            {% block content %}{% endblock %}
+    
     </body>
 </html>

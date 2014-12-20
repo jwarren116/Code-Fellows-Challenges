@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div id="columns">
+    <div class="right column">
+        <form action="" method="POST">{% csrf_token %}
+            <p><label for="fname"><b>First Name:</b></label></br>
+                <input id="fname" type="text" name="fname" required="True" maxlength="100" style="width:250px" autofocus /></p>
+            <p><label for="lname">Last Name:</label></br>
+                <input id="lname" type="text" name="lname" maxlength="100" style="width:250px" /></p>
+            <p><label for="email"><b>Email:</b></label></br>
+                <input id="email" type="email" name="email" required="True" maxlength="75" style="width:250px" /></p>
+            <input type="submit" value="Add to User Database" />
+        </form>
+    </div>
+
+    <div class="left column">
+        {% if users %}
+            <table>
+                <col width="150"><col width="150"><col width="200"><col width="30"><col width="30">
+                <thead>
+                    <tr>
+                        <th>First</th>
+                        <th>Last</th>
+                        <th>Email</th>
+                        <th><!-- Edit --></th>
+                        <th><!-- Delete --></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                        <tr>
+                            <td align=center>{{ user.fname }}</td>
+                            <td align=center>{{ user.lname }}</td>
+                            <td align=center>{{ user.email }}</td>
+                            <td align=center><a href="{% url 'detail' user.id %}">Edit</a></td>
+                            <td align=center><a href="{% url 'delete' user.id %}">Delete</a></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <strong>No users to display!</strong>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
