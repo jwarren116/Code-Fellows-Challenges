@@ -10,6 +10,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
@@ -20,12 +21,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = '!54q9fl=3i7zo*%-akdulq&)*j8lfd4^3iweqlr!ztry$s2ou+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
+DEBUG = False
 TEMPLATE_DEBUG = True
-
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -52,10 +50,8 @@ ROOT_URLCONF = 'UserApp.urls'
 
 WSGI_APPLICATION = 'UserApp.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -63,30 +59,13 @@ DATABASES = {
     }
 }
 
-
-# DATABASES['default']['ENGINE'] = 'django_postgrespool'
-# DATABASES['default']['NAME'] = os.path.join(BASE_DIR, '')
-# DATABASES['default']['ENGINE'] = 'django.db.backends.sqlite3'
-
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
-
-
-TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 # Parse database configuration from $DATABASE_URL
 import dj_database_url
@@ -99,14 +78,11 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 ALLOWED_HOSTS = ['*']
 
 # Static asset configuration
-import os
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
-
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 
-
-
+TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
